@@ -1,0 +1,37 @@
+{
+  "name": "@dsquare-gbu/vue-utils",
+  "version": "1.0.1",
+  "description": "To support Vue application",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "babel src --out-dir ./dist --delete-dir-on-start --minified --source-maps",
+    "test": "nyc mocha --require @babel/register",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git-gbu.japaneast.cloudapp.azure.com:gbu/vue-utils.git"
+  },
+  "keywords": [
+    "vue",
+    "vue.js",
+    "vuejs",
+    "application",
+    "utils"
+  ],
+  "author": "Nguyen Tuan Linh <tuanlinh.nguyen@dsquare.com.vn>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/register": "^7.10.4",
+    "chai": "^4.2.0",
+    "coveralls": "^3.1.0",
+    "crypto-js": "^4.0.0",
+    "jquery": "^3.5.1",
+    "js-cookie": "^2.2.1",
+    "mocha": "^8.0.1",
+    "nyc": "^15.1.0"
+  }
+}

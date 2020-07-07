@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/log/index.js"],"names":["default","Log","ConsoleLog"],"mappings":"AAAA,OAAQA,OAAO,GAAIC,CAAAA,GAAnB,KAA6B,OAA7B,CACA,OAAQD,OAAO,GAAIE,CAAAA,UAAnB,KAAoC,eAApC","sourcesContent":["export {default as Log} from './log'\r\nexport {default as ConsoleLog} from './console-log'\r\n"],"file":"index.js"}

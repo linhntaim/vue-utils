@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/external-assets/js/script-pointer.js"],"names":["scriptPointer"],"mappings":"AAAA,GAAIA,CAAAA,aAAa,CAAG,CAApB,CAEA,cAAeA,CAAAA,aAAf","sourcesContent":["let scriptPointer = 0\r\n\r\nexport default scriptPointer\r\n"],"file":"script-pointer.js"}
