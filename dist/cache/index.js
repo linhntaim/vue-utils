@@ -1,2 +1,2 @@
-export{CacheHandler}from"./cache-handler";export{LocalCacheHandler}from"./local-cache-handler";
+"use strict";Object.defineProperty(exports,"__esModule",{value:true});Object.defineProperty(exports,"CacheHandler",{enumerable:true,get:function get(){return _cacheHandler.CacheHandler}});Object.defineProperty(exports,"LocalCacheHandler",{enumerable:true,get:function get(){return _localCacheHandler.LocalCacheHandler}});var _cacheHandler=require("./cache-handler");var _localCacheHandler=require("./local-cache-handler");
 //# sourceMappingURL=index.js.map

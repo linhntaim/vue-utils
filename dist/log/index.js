@@ -1,2 +1,2 @@
-export{default as Log}from"./log";export{default as ConsoleLog}from"./console-log";
+"use strict";Object.defineProperty(exports,"__esModule",{value:true});Object.defineProperty(exports,"Log",{enumerable:true,get:function get(){return _log["default"]}});Object.defineProperty(exports,"ConsoleLog",{enumerable:true,get:function get(){return _consoleLog["default"]}});var _log=_interopRequireDefault(require("./log"));var _consoleLog=_interopRequireDefault(require("./console-log"));function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{"default":obj}}
 //# sourceMappingURL=index.js.map
