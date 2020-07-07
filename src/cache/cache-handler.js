@@ -1,4 +1,4 @@
-export default class CacheHandler {
+export class CacheHandler {
     constructor() {
         this.cache = {}
     }

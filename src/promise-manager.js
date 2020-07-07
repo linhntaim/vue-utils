@@ -1,4 +1,4 @@
-export default class PromiseManager {
+export class PromiseManager {
     constructor() {
         this.promises = {}
     }

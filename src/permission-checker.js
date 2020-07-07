@@ -1,4 +1,4 @@
-export default class PermissionChecker {
+export class PermissionChecker {
     checkAtLeast(requirePermissions, permissions) {
         if (!requirePermissions || !requirePermissions.length) {
             return true

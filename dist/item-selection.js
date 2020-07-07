@@ -1,4 +1,4 @@
-export default class ItemSelection{constructor(){this.allSelected=false;this.all=[];this.selected=[]}/**
+export class ItemSelection{constructor(){this.allSelected=false;this.all=[];this.selected=[]}/**
      *
      * @param {Array} all
      * @returns {ItemSelection}

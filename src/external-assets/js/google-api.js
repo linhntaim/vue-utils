@@ -1,6 +1,6 @@
-import JsLoader from './js-loader'
+import {JsLoader} from './js-loader'
 
-export default class GoogleApi extends JsLoader {
+export class GoogleApi extends JsLoader {
     load(resolve) {
         this.addScript('https://apis.google.com/js/api:client.js')
 

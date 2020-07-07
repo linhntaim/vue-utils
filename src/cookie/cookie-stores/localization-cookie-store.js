@@ -1,6 +1,6 @@
-import CookieStore from './cookie-store'
+import {CookieStore} from './cookie-store'
 
-export default class LocalizationCookieStore extends CookieStore {
+export class LocalizationCookieStore extends CookieStore {
     retrieve() {
         if (this.disabled) return null
 

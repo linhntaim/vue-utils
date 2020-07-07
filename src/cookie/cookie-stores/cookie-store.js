@@ -1,4 +1,4 @@
-export default class CookieStore {
+export class CookieStore {
     constructor(cookieHandler, name, def = null, disabled = false) {
         this.cookieHandler = cookieHandler
         this.name = name

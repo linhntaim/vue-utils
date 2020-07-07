@@ -1,4 +1,4 @@
-export default class ItemSelection {
+export class ItemSelection {
     constructor() {
         this.allSelected = false
         this.all = []

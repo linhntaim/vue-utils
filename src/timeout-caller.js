@@ -1,4 +1,4 @@
-export default class TimeoutCaller {
+export class TimeoutCaller {
     constructor() {
         this.calls = []
     }

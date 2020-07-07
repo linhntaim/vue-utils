@@ -1,4 +1,4 @@
-export default class FileHelper {
+export class FileHelper {
     constructor(numberFormatHelper) {
         this.numberFormatHelper = numberFormatHelper
         this.fileSizeType = ['byte', 'bytes', 'KB', 'MB', 'GB']

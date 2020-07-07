@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie'
-import CookieHandler from './cookie-handler'
+import {CookieHandler} from './cookie-handler'
 
-export default class JsCookieHandler extends CookieHandler {
+export class JsCookieHandler extends CookieHandler {
     setRaw(name, data, expires = null, path = '/', domain = null, sameSite = 'lax') {
         Cookies.set(name, data, this.buildOptions(expires, domain, path, sameSite))
     }

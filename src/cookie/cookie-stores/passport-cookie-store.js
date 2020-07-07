@@ -1,6 +1,6 @@
-import CookieStore from './cookie-store'
+import {CookieStore} from './cookie-store'
 
-export default class PassportCookieStore extends CookieStore {
+export class PassportCookieStore extends CookieStore {
     convert(rawPassport) {
         return {
             accessToken: rawPassport.access_token,

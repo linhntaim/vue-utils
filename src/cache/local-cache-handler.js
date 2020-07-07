@@ -1,6 +1,6 @@
-import CacheHandler from './cache-handler'
+import {CacheHandler} from './cache-handler'
 
-export default class LocalCacheHandler extends CacheHandler {
+export class LocalCacheHandler extends CacheHandler {
     constructor() {
         super()
 

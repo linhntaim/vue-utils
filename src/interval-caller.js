@@ -1,4 +1,4 @@
-export default class IntervalCaller {
+export class IntervalCaller {
     constructor() {
         this.calls = []
     }

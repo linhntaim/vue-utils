@@ -1,4 +1,4 @@
-export default class ServerClock {
+export class ServerClock {
     constructor(clockBlockKeys, clockBlockRange) {
         this.clockBlockKeys = clockBlockKeys
         this.clockBlockRange = clockBlockRange

@@ -1,4 +1,4 @@
-export default class Sorter {
+export class Sorter {
     constructor() {
         this.by = ''
         this.order = 'asc'

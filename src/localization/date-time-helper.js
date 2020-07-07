@@ -1,6 +1,6 @@
 import LocalizationHelper from './localization-helper'
 
-export default class DateTimeHelper extends LocalizationHelper {
+export class DateTimeHelper extends LocalizationHelper {
     constructor(localization) {
         super(localization)
         this.compiler = null

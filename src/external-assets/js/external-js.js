@@ -1,6 +1,6 @@
 import scriptPointer from './script-pointer'
 
-export default class ExternalJs {
+export class ExternalJs {
     constructor() {
         this.session = {}
         this.sessionPointer = 0

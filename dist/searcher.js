@@ -1,4 +1,4 @@
-export default class Searcher{constructor(){this.defaultParams={};this.params={};this.stateParams={};this.searching=false}/**
+export class Searcher{constructor(){this.defaultParams={};this.params={};this.stateParams={};this.searching=false}/**
      *
      * @param params
      * @param setDefault

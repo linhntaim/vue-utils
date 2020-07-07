@@ -1,4 +1,4 @@
-export default class CallbackWaiter {
+export class CallbackWaiter {
     constructor() {
         this.waiters = {}
     }

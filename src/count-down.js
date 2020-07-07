@@ -1,4 +1,4 @@
-export default class CountDown {
+export class CountDown {
     constructor(intervalCaller) {
         this.intervalCaller = intervalCaller
         this.reset()

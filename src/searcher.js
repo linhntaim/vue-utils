@@ -1,4 +1,4 @@
-export default class Searcher {
+export class Searcher {
     constructor() {
         this.defaultParams = {}
         this.params = {}

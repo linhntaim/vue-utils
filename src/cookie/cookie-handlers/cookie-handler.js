@@ -1,4 +1,4 @@
-export default class CookieHandler {
+export class CookieHandler {
     constructor(crypto, settings) {
         this.crypto = crypto
         this.settings = settings

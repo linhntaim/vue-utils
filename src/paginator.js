@@ -1,4 +1,4 @@
-export default class Paginator {
+export class Paginator {
     constructor(itemsPerPageList, cache) {
         this.itemsPerPageList = itemsPerPageList
         this.pagination = {

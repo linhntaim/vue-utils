@@ -1,4 +1,4 @@
-export default class DataPlot {
+export class DataPlot {
     constructor() {
         this.dataPlot = {}
     }

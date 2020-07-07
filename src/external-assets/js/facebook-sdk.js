@@ -1,6 +1,6 @@
-import JsLoader from './js-loader'
+import {JsLoader} from './js-loader'
 
-export default class FacebookSdk extends JsLoader {
+export class FacebookSdk extends JsLoader {
     constructor(settings = {}) {
         super(settings)
 

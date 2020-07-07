@@ -1,6 +1,6 @@
 import CryptoJS from 'crypto-js'
 
-export default class Crypto {
+export class Crypto {
     encrypt(text, secret) {
         return CryptoJS.AES.encrypt(text, secret).toString()
     }

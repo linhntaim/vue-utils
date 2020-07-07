@@ -2,7 +2,7 @@ import LocalizationHelper from './localization-helper'
 
 const DEFAULT_NUMBER_OF_DECIMAL_POINTS = 2
 
-export default class NumberFormatHelper extends LocalizationHelper {
+export class NumberFormatHelper extends LocalizationHelper {
     constructor(localization) {
         super(localization)
 

@@ -1,7 +1,7 @@
+import {ExternalJs} from './external-js'
 import Loader from '../loader'
-import ExternalJs from './external-js'
 
-export default class JsLoader extends Loader {
+export class JsLoader extends Loader {
     constructor(settings = {}) {
         super(settings)
 
