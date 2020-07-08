@@ -14,11 +14,13 @@ export {
 } from './ui'
 export {
     CookieHandler, JsCookieHandler,
-    CookieStore, DeviceCookieStore, LocalizationCookieStore, PassportCookieStore,
+    CookieStore, DeviceCookieStore, SettingsCookieStore, PassportCookieStore,
 } from './cookie'
 export {DateTimeHelper, NumberFormatHelper} from './localization'
 
 export {JsLoader, GoogleApi, FacebookSdk} from './external-assets'
+
+export {IP} from './ip'
 
 export {Collection} from './collection'
 export {DataPlot} from './data-plot'

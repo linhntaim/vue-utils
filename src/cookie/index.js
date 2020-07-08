@@ -3,5 +3,5 @@ export {JsCookieHandler} from './cookie-handlers/js-cookie-handler'
 
 export {CookieStore} from './cookie-stores/cookie-store'
 export {DeviceCookieStore} from './cookie-stores/device-cookie-store'
-export {LocalizationCookieStore} from './cookie-stores/localization-cookie-store'
+export {SettingsCookieStore} from './cookie-stores/settings-cookie-store'
 export {PassportCookieStore} from './cookie-stores/passport-cookie-store'

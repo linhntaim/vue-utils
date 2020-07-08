@@ -1,24 +1,31 @@
 export class CookieStore {
-    constructor(cookieHandler, name, def = null, disabled = false) {
+    constructor(cookieHandler, name, def = null) {
         this.cookieHandler = cookieHandler
         this.name = name
+        this.value = null
         this.def = def
-        this.disabled = disabled
+    }
+
+    transform(value) {
+        return value
     }
 
     retrieve() {
-        if (this.disabled) return null
-        const value = this.cookieHandler.get(this.name)
-        return value ? value : this.def
+        if (this.value == null) {
+            const value = this.cookieHandler.get(this.name)
+            this.value = this.transform(value ? value : this.def)
+        }
+        return this.value
     }
 
-    store(data, expires = 365) {
-        if (this.disabled) return null
-        this.cookieHandler.set(this.name, data, expires)
-        return data
+    store(value, expires = 365) {
+        this.value = this.transform(data)
+        this.cookieHandler.set(this.name, this.value, expires)
+        return this.value
     }
 
     remove() {
         this.cookieHandler.remove([this.name])
+        this.value = null
     }
 }
