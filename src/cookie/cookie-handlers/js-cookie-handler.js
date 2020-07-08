@@ -23,7 +23,7 @@ export class JsCookieHandler extends CookieHandler {
             path: path ? path : this.settings.path,
             domain: domain ? domain : this.settings.domain,
             secure: window.location.protocol === 'https',
-            sameSite: sameSite,
+            sameSite: sameSite ? sameSite : this.settings.sameSite,
         }
     }
 }
