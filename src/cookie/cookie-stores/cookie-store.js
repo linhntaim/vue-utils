@@ -19,7 +19,7 @@ export class CookieStore {
     }
 
     store(value, expires = 365) {
-        this.value = this.transform(data)
+        this.value = this.transform(value)
         this.cookieHandler.set(this.name, this.value, expires)
         return this.value
     }

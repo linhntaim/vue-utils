@@ -7,7 +7,7 @@ export class JsCookieHandler extends CookieHandler {
     }
 
     getRaw(name) {
-        return Cookies.get(name, null)
+        return Cookies.get(name)
     }
 
     remove(names, path = '/', domain = null) {
