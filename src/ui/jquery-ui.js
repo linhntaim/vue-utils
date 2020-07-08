@@ -1,14 +1,17 @@
 import {Ui} from './ui'
 import {JqueryDomSelection} from './jquery-dom-selection'
-import $ from 'jquery'
 
 export class JqueryUi extends Ui {
     scrollToTop() {
-        window.scrollTo(0, 0)
+        window.$('html, body').animate({
+            scrollTop: 0,
+        }, 500, 'easeOutExpo')
     }
 
     scrollToBottom() {
-        window.scrollTo(0, document.body.scrollHeight)
+        window.$('html, body').animate({
+            scrollTop: document.body.scrollHeight,
+        }, 500, 'easeOutExpo')
     }
 
     /**
@@ -17,6 +20,6 @@ export class JqueryUi extends Ui {
      * @returns {JqueryDomSelection}
      */
     query(selector) {
-        return new JqueryDomSelection($(selector))
+        return new JqueryDomSelection(window.$(selector))
     }
 }
