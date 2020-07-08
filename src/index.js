@@ -6,13 +6,19 @@ export {IntervalCaller} from './interval-caller'
 export {ServerClock} from './server-clock'
 export {Crypto} from './crypto'
 
-export * from './log'
-export * from './cache'
-export * from './ui'
-export * from './cookie'
-export * from './localization'
+export {Log, ConsoleLog} from './log'
+export {CacheHandler, LocalCacheHandler} from './cache'
+export {
+    Ui, DomSelection,
+    JqueryUi, JqueryDomSelection
+} from './ui'
+export {
+    CookieHandler, JsCookieHandler,
+    CookieStore, DeviceCookieStore, LocalizationCookieStore, PassportCookieStore,
+} from './cookie'
+export {DateTimeHelper, NumberFormatHelper} from './localization'
 
-export * from './external-assets'
+export {JsLoader, GoogleApi, FacebookSdk} from './external-assets'
 
 export {Collection} from './collection'
 export {DataPlot} from './data-plot'

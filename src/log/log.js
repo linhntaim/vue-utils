@@ -1,4 +1,4 @@
-export default class Log {
+export class Log {
     constructor(debug = true, onlyNamespaces = []) {
         this.debug = debug
         this.onlyNamespaces = onlyNamespaces

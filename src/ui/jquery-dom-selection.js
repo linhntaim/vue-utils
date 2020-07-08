@@ -1,4 +1,4 @@
-import DomSelection from './dom-selection'
+import {DomSelection} from './dom-selection'
 
-export default class JqueryDomSelection extends DomSelection {
+export class JqueryDomSelection extends DomSelection {
 }

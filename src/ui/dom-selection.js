@@ -1,4 +1,4 @@
-export default class DomSelection {
+export class DomSelection {
     constructor(selection) {
         this.selection = selection
     }

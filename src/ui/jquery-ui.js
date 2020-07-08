@@ -1,8 +1,8 @@
-import Ui from './ui'
-import JqueryDomSelection from './jquery-dom-selection'
+import {Ui} from './ui'
+import {JqueryDomSelection} from './jquery-dom-selection'
 import $ from 'jquery'
 
-export default class JqueryUi extends Ui {
+export class JqueryUi extends Ui {
     scrollToTop() {
         window.scrollTo(0, 0)
     }

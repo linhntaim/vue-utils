@@ -1,6 +1,6 @@
-import DomSelection from './dom-selection'
+import {DomSelection} from './dom-selection'
 
-export default class Ui {
+export class Ui {
     constructor() {
         this.selectElement = document.body.createTextRange ?
             element => {

@@ -1,4 +1,4 @@
-export {default as Ui} from './ui'
-export {default as JqueryUi} from './jquery-ui'
-export {default as DomSelection} from './dom-selection'
-export {default as JqueryDomSelection} from './jquery-dom-selection'
+export {Ui} from './ui'
+export {JqueryUi} from './jquery-ui'
+export {DomSelection} from './dom-selection'
+export {JqueryDomSelection} from './jquery-dom-selection'

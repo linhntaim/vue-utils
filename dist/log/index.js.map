@@ -1,1 +1,1 @@
-{"version":3,"sources":["../../src/log/index.js"],"names":[],"mappings":"wRAAA,kDACA,iE","sourcesContent":["export {default as Log} from './log'\r\nexport {default as ConsoleLog} from './console-log'\r\n"],"file":"index.js"}
+{"version":3,"sources":["../../src/log/index.js"],"names":[],"mappings":"iRAAA,0BACA","sourcesContent":["export {Log} from './log'\r\nexport {ConsoleLog} from './console-log'\r\n"],"file":"index.js"}
