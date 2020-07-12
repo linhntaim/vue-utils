@@ -14,7 +14,7 @@ export class CookieHandler {
     }
 
     set(name, data, expires = null, path = '/', domain = null, sameSite = 'lax') {
-        this.setRaw(name, this.encrypt(data), expires = null, path = '/', domain = null, sameSite = 'lax')
+        this.setRaw(name, this.encrypt(data), expires, path, domain, sameSite)
     }
 
     setRaw(name, data, expires = null, path = '/', domain = null, sameSite = 'lax') {
