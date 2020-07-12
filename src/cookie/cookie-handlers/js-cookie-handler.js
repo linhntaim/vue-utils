@@ -3,7 +3,7 @@ import {CookieHandler} from './cookie-handler'
 
 export class JsCookieHandler extends CookieHandler {
     setRaw(name, data, expires = null, path = '/', domain = null, sameSite = 'lax') {
-        Cookies.set(name, data, this.buildOptions(expires, domain, path, sameSite))
+        Cookies.set(name, data, this.buildOptions(expires, path, domain, sameSite))
     }
 
     getRaw(name) {
