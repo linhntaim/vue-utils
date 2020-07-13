@@ -10,7 +10,7 @@ export {Log, ConsoleLog} from './log'
 export {CacheHandler, LocalCacheHandler} from './cache'
 export {
     Ui, DomSelection,
-    JqueryUi, JqueryDomSelection
+    JqueryUi, JqueryDomSelection,
 } from './ui'
 export {
     CookieHandler, JsCookieHandler,
@@ -21,6 +21,8 @@ export {DateTimeHelper, NumberFormatHelper} from './localization'
 export {JsLoader, GoogleApi, FacebookSdk} from './external-assets'
 
 export {IP} from './ip'
+
+export {AppOptions} from './app-options'
 
 export {Collection} from './collection'
 export {DataPlot} from './data-plot'
