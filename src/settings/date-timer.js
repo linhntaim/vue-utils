@@ -1,9 +1,9 @@
-import LocalizationHelper from './localization-helper'
+import SettingsHelper from './settings-helper'
 
-export class DateTimeHelper extends LocalizationHelper {
-    constructor(localization) {
-        super(localization)
-        this.compiler = null
+export class DateTimer extends SettingsHelper {
+    constructor(settings, compiler = null) {
+        super(settings)
+        this.compiler = compiler
     }
 
     withCompiler(compiler) {
@@ -11,11 +11,11 @@ export class DateTimeHelper extends LocalizationHelper {
         return this
     }
 
-    localize(localization) {
-        this.longDateFormat = 'def.datetime.long_date_' + localization.long_date_format
-        this.shortDateFormat = 'def.datetime.short_date_' + localization.short_date_format
-        this.longTimeFormat = 'def.datetime.long_time_' + localization.long_time_format
-        this.shortTimeFormat = 'def.datetime.short_time_' + localization.short_time_format
+    apply(settings) {
+        this.longDateFormat = 'def.datetime.long_date_' + settings.longDateFormat
+        this.shortDateFormat = 'def.datetime.short_date_' + settings.shortDateFormat
+        this.longTimeFormat = 'def.datetime.long_time_' + settings.longTimeFormat
+        this.shortTimeFormat = 'def.datetime.short_time_' + settings.shortTimeFormat
         return this
     }
 

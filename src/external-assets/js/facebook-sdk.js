@@ -26,10 +26,10 @@ export class FacebookSdk extends JsLoader {
         if (!window.fbAsyncInit) {
             window.fbAsyncInit = () => {
                 window.FB.init({
-                    appId: this.settings.client_id,
+                    appId: this.settings.clientId,
                     status: true,
                     xfbml: false,
-                    version: this.settings.api_version,
+                    version: this.settings.apiVersion,
                 })
 
                 this.loaded = true

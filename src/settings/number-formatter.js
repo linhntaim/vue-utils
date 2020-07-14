@@ -1,16 +1,17 @@
-import LocalizationHelper from './localization-helper'
+import SettingsHelper from './settings-helper'
 
 const DEFAULT_NUMBER_OF_DECIMAL_POINTS = 2
 
-export class NumberFormatHelper extends LocalizationHelper {
-    constructor(localization) {
-        super(localization)
+export class NumberFormatter extends SettingsHelper {
+    constructor(settings) {
+        super(settings)
 
         this.numberOfDecimalPoints = DEFAULT_NUMBER_OF_DECIMAL_POINTS
     }
 
-    localize(localization) {
-        this.type = localization.number_format
+    apply(settings) {
+        this.type = settings.numberFormat
+        return this
     }
 
     modeInt() {

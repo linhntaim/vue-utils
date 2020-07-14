@@ -16,7 +16,7 @@ export {
     CookieHandler, JsCookieHandler,
     CookieStore, DeviceCookieStore, SettingsCookieStore, PassportCookieStore,
 } from './cookie'
-export {DateTimeHelper, NumberFormatHelper} from './localization'
+export {DateTimer, NumberFormatter} from './settings'
 
 export {JsLoader, GoogleApi, FacebookSdk} from './external-assets'
 

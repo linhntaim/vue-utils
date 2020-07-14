@@ -1,6 +1,6 @@
 export class FileHelper {
-    constructor(numberFormatHelper) {
-        this.numberFormatHelper = numberFormatHelper
+    constructor(numberFormatter) {
+        this.numberFormatter = numberFormatter
         this.fileSizeType = ['byte', 'bytes', 'KB', 'MB', 'GB']
     }
 
@@ -17,7 +17,7 @@ export class FileHelper {
         }
 
         return (fileSize - parseInt(fileSize) > 0 ?
-            this.numberFormatHelper.formatNumber(fileSize) : this.numberFormatHelper.formatInt(fileSize))
+            this.numberFormatter.formatNumber(fileSize) : this.numberFormatter.formatInt(fileSize))
             + ' ' + this.fileSizeType[typeIndex]
     }
 }

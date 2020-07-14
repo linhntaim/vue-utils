@@ -1,2 +1,0 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:true});Object.defineProperty(exports,"NumberFormatHelper",{enumerable:true,get:function get(){return _numberFormatHelper.NumberFormatHelper}});Object.defineProperty(exports,"DateTimeHelper",{enumerable:true,get:function get(){return _dateTimeHelper.DateTimeHelper}});var _numberFormatHelper=require("./number-format-helper");var _dateTimeHelper=require("./date-time-helper");
-//# sourceMappingURL=index.js.map
