@@ -46,7 +46,7 @@ export class Paginator {
                 prev: atFirst ? 1 : current - 1,
                 next: atLast ? last : current + 1,
                 pages: {
-                    from: pageFrom,
+                    from: pageFrom < first ? first : pageFrom,
                     to: pageTo,
                 },
                 items: {
