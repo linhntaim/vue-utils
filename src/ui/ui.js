@@ -26,6 +26,10 @@ export class Ui {
         document.querySelector('html').setAttribute('lang', lang)
     }
 
+    waitRendering(callback) {
+        window.requestAnimationFrame(callback)
+    }
+
     scrollToTop() {
         window.scrollTo(0, 0)
     }
