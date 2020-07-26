@@ -2,8 +2,10 @@ import {ProgressHandler} from '../progress-handler'
 import {FileSplitter} from './file-splitter'
 
 export class FilesUploader {
-    constructor(ui, percentageTextTemplate = '{percent}%') {
+    constructor(ui, maxUploadFileSize, maximumChunkSize = 1024 * 1024 * 10, percentageTextTemplate = '{percent}%') {
         this.ui = ui
+        this.maxUploadFileSize = maxUploadFileSize
+        this.maximumChunkSize = maximumChunkSize
         this.percentageTextTemplate = percentageTextTemplate
         this.files = []
         this.progress = new ProgressHandler(this.ui, this.percentageTextTemplate)
@@ -16,6 +18,7 @@ export class FilesUploader {
      * @return {Promise}
      */
     processFiles(files, filteredCallback = null) {
+        this.files = []
         return new Promise(resolve => {
             let remaining = files.length
             const left = () => {
@@ -103,7 +106,12 @@ export class FilesUploader {
         return this
     }
 
-    processChunks(chunkSize, everyChunkCallback, everyDoneCallback = null, everyErrorCallback = null, everyPromisedBeforeCallback = null) {
+    processChunks(everyChunkCallback, everyDoneCallback = null, everyErrorCallback = null, everyPromisedBeforeCallback = null) {
+        let chunkSize = this.maxUploadFileSize / 2
+        if (chunkSize > this.maximumChunkSize) {
+            chunkSize = this.maximumChunkSize
+        }
+
         return new Promise(resolve => {
             let remaining = this.files.length
             const left = () => {
