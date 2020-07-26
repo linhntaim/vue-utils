@@ -10,8 +10,9 @@ export class FileHelper {
 
     asSizeWithTypeIndex(fileSize, typeIndex = 1) {
         if (fileSize > 1024) {
-            return this.asSize(fileSize / 1024, ++typeIndex)
+            return this.asSizeWithTypeIndex(fileSize / 1024, ++typeIndex)
         }
+
         if (typeIndex === 1 && fileSize <= 1) {
             typeIndex = 0
         }

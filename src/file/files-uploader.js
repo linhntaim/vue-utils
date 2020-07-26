@@ -11,7 +11,7 @@ export class FilesUploader {
 
     /**
      *
-     * @param {FileList} files
+     * @param {FileList | array } files
      * @param {function | null} filteredCallback
      * @return {Promise}
      */
@@ -147,15 +147,17 @@ export class FilesUploader {
             }
 
             file.progress.increaseLimit(remaining)
-            fileSplitter.every((chunkData, chunkIndex, chunkTotal) => {
+            fileSplitter.every((chunkData, chunkIndex, chunksTotal) => {
                 file.progress.run((progressResolve, progressReject) => {
-                    chunkCallback(chunkData, chunkIndex, chunkTotal, () => {
-                        progressResolve()
-                        left()
-                    }, () => {
-                        progressReject()
-                        reject()
-                    }, file, data)
+                    this.ui.waitRendering(() => {
+                        chunkCallback(chunkData, chunkIndex, chunksTotal, () => {
+                            progressResolve()
+                            left()
+                        }, () => {
+                            progressReject()
+                            reject()
+                        }, file, data)
+                    })
                 })
             })
         })
