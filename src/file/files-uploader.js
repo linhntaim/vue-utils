@@ -11,6 +11,13 @@ export class FilesUploader {
         this.progress = new ProgressHandler(this.ui, this.percentageTextTemplate)
     }
 
+    quickProcessFilesWithChunks({files, filteredCallback = null}, {chunkSize, everyChunkCallback, everyDoneCallback = null, everyErrorCallback = null, everyPromisedBeforeCallback = null}, preview = false) {
+        this.processFiles(files, filteredCallback).then(() => {
+            const processChunks = () => this.processChunks(chunkSize, everyChunkCallback, everyDoneCallback, everyErrorCallback, everyPromisedBeforeCallback)
+            preview ? this.processPreview().then(processChunks) : processChunks()
+        })
+    }
+
     /**
      *
      * @param {FileList | array } files

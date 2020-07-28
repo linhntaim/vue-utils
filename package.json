@@ -1,6 +1,6 @@
 {
     "name": "@dsquare-gbu/vue-utils",
-    "version": "1.0.23",
+    "version": "1.0.24",
     "description": "To support Vue application",
     "main": "dist/index.js",
     "scripts": {
