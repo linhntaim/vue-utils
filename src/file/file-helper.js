@@ -24,7 +24,7 @@ export class FileHelper {
 
     checkFile(file, {allowedExtensions = null, allowedExtensionsErrorCallback = null, maxSize = null, maxSizeErrorCallback = null}) {
         if (allowedExtensions) {
-            if (file.name.includes('.') || allowedExtensions.includes(file.name.split('.').pop()) === -1) {
+            if (!file.name.includes('.') || !allowedExtensions.includes(file.name.split('.').pop())) {
                 allowedExtensionsErrorCallback && allowedExtensionsErrorCallback()
                 return false
             }
