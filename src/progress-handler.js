@@ -6,11 +6,18 @@ export class ProgressHandler {
         this.reset()
     }
 
+    delayCompletion(delay = 500) {
+        this.delay = delay
+
+        return this
+    }
+
     reset() {
         this.limit = 0
         this.current = 0
         this.percentage = 0
-        this.completed = true
+        this.completed = false
+        this.delay = 500
         this.updatePercentageText()
 
         return this
@@ -59,7 +66,7 @@ export class ProgressHandler {
     }
 
     updateCompleted() {
-        this.completed = this.current === this.limit
+        setTimeout(() => this.completed = this.current === this.limit, this.delay)
         return this
     }
 
