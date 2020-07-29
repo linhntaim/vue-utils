@@ -13,6 +13,17 @@ export class FileSplitter {
         for (let i = 0; i < numChunks; ++i) {
             this.chunks.push(file.slice(i * chunkSize, (i + 1) * chunkSize))
         }
+        this.at = 0
+    }
+
+    next() {
+        if (this.at === this.chunks.length) return false
+        const index = this.at++
+        return {
+            data: this.chunks[index],
+            index: index,
+            total: this.length(),
+        }
     }
 
     every(callback) {

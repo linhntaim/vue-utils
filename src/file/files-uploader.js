@@ -11,7 +11,7 @@ export class FilesUploader {
         this.progress = new ProgressHandler(this.ui, this.percentageTextTemplate)
     }
 
-    quickProcessFilesWithChunks({files, filteredCallback = null}, {everyChunkCallback, everyDoneCallback = null, everyErrorCallback = null, everyPromisedBeforeCallback = null}, preview = false) {
+    quickProcessFilesWithChunks({files, filteredCallback = null}, {everyChunkCallback, everyDoneCallback = null, everyErrorCallback = null, everyPromisedBeforeCallback = null, continuously = false}, preview = false) {
         this.processFiles(files, filteredCallback).then(() => {
             const processChunks = () => this.processChunks(everyChunkCallback, everyDoneCallback, everyErrorCallback, everyPromisedBeforeCallback)
             preview ? this.processPreview().then(processChunks) : processChunks()
@@ -113,7 +113,7 @@ export class FilesUploader {
         return this
     }
 
-    processChunks(everyChunkCallback, everyDoneCallback = null, everyErrorCallback = null, everyPromisedBeforeCallback = null) {
+    processChunks(everyChunkCallback, everyDoneCallback = null, everyErrorCallback = null, everyPromisedBeforeCallback = null, continuously = false) {
         let chunkSize = this.maxUploadFileSize / 2
         if (chunkSize > this.maximumChunkSize) {
             chunkSize = this.maximumChunkSize
@@ -132,15 +132,25 @@ export class FilesUploader {
             this.files.forEach(file => {
                 const run = (data = null) => {
                     this.progress.run((progressResolve, progressReject) => {
-                        this.processFileChunks(file, chunkSize, everyChunkCallback, data).then(() => {
-                            progressResolve()
-                            everyDoneCallback && everyDoneCallback(file)
-                            left()
-                        }).catch(() => {
-                            progressReject()
-                            everyErrorCallback && everyErrorCallback(file)
-                            left()
-                        })
+                        continuously ?
+                            this.processFileChunks(file, chunkSize, everyChunkCallback, data).then(() => {
+                                progressResolve()
+                                everyDoneCallback && everyDoneCallback(file)
+                                left()
+                            }).catch(() => {
+                                progressReject()
+                                everyErrorCallback && everyErrorCallback(file)
+                                left()
+                            })
+                            :  this.processFileChunksContinuously(file, chunkSize, everyChunkCallback, data).then(() => {
+                                progressResolve()
+                                everyDoneCallback && everyDoneCallback(file)
+                                left()
+                            }).catch(() => {
+                                progressReject()
+                                everyErrorCallback && everyErrorCallback(file)
+                                left()
+                            })
                     })
                 }
 
@@ -150,9 +160,8 @@ export class FilesUploader {
     }
 
     processFileChunks(file, chunkSize, chunkCallback, data = null) {
-        const fileSplitter = new FileSplitter(file.original, chunkSize)
-
         return new Promise((resolve, reject) => {
+            const fileSplitter = new FileSplitter(file.original, chunkSize)
             let remaining = fileSplitter.length()
             const left = () => {
                 --remaining
@@ -175,6 +184,41 @@ export class FilesUploader {
                     })
                 })
             })
+        })
+    }
+
+    processFileChunksContinuously(file, chunkSize, chunkCallback, data = null) {
+        return new Promise((resolve, reject) => {
+            const fileSplitter = new FileSplitter(file.original, chunkSize)
+            let remaining = fileSplitter.length()
+            const left = () => {
+                --remaining
+                if (remaining === 0) {
+                    resolve()
+                }
+            }
+
+            file.progress.increaseLimit(remaining)
+
+            const process = () => {
+                const chunk = fileSplitter.next()
+                if (chunk === false) return
+                (new Promise((chunkResolve, chunkReject) => {
+                    file.progress.run((progressResolve, progressReject) => {
+                        this.ui.waitRendering(() => {
+                            chunkCallback(chunk.data, chunk.index, chunk.total, () => {
+                                progressResolve()
+                                chunkResolve()
+                                left()
+                            }, () => {
+                                progressReject()
+                                chunkReject()
+                                reject()
+                            }, file, data)
+                        })
+                    })
+                })).then(process)
+            }
         })
     }
 }
