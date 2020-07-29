@@ -13,7 +13,7 @@ export class FilesUploader {
 
     quickProcessFilesWithChunks({files, filteredCallback = null}, {everyChunkCallback, everyDoneCallback = null, everyErrorCallback = null, everyPromisedBeforeCallback = null, continuously = false}, preview = false) {
         this.processFiles(files, filteredCallback).then(() => {
-            const processChunks = () => this.processChunks(everyChunkCallback, everyDoneCallback, everyErrorCallback, everyPromisedBeforeCallback)
+            const processChunks = () => this.processChunks(everyChunkCallback, everyDoneCallback, everyErrorCallback, everyPromisedBeforeCallback, continuously)
             preview ? this.processPreview().then(processChunks) : processChunks()
         })
     }
@@ -133,7 +133,7 @@ export class FilesUploader {
                 const run = (data = null) => {
                     this.progress.run((progressResolve, progressReject) => {
                         continuously ?
-                            this.processFileChunks(file, chunkSize, everyChunkCallback, data).then(() => {
+                            this.processFileChunksContinuously(file, chunkSize, everyChunkCallback, data).then(() => {
                                 progressResolve()
                                 everyDoneCallback && everyDoneCallback(file)
                                 left()
@@ -142,7 +142,7 @@ export class FilesUploader {
                                 everyErrorCallback && everyErrorCallback(file)
                                 left()
                             })
-                            :  this.processFileChunksContinuously(file, chunkSize, everyChunkCallback, data).then(() => {
+                            : this.processFileChunks(file, chunkSize, everyChunkCallback, data).then(() => {
                                 progressResolve()
                                 everyDoneCallback && everyDoneCallback(file)
                                 left()
@@ -219,6 +219,7 @@ export class FilesUploader {
                     })
                 })).then(process)
             }
+            process()
         })
     }
 }
