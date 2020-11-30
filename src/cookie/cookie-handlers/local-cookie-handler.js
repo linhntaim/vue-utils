@@ -8,19 +8,23 @@ export class LocalCookieHandler extends CookieHandler {
         this.localCacheHandler = new LocalCacheHandler()
     }
 
+    naming(name, suffix = null) {
+        return '___cookie:' + name + (suffix ? ':' + suffix : '')
+    }
+
     setRaw(name, data, expires = null, path = '/', domain = null, sameSite = 'lax') {
         if (expires) {
             if (expires <= new Date()) {
                 return
             }
-            this.localCacheHandler.set(name + '___expires', expires.toString())
+            this.localCacheHandler.set(this.naming(name, 'expires'), expires.toString())
         }
-        this.localCacheHandler.set(name + '___path', path)
-        this.localCacheHandler.set(name, data)
+        this.localCacheHandler.set(this.naming(name, 'path'), path)
+        this.localCacheHandler.set(this.naming(name), data)
     }
 
     getRaw(name) {
-        const expires = this.localCacheHandler.get(name + '___expires')
+        const expires = this.localCacheHandler.get(this.naming(name, 'expires'))
         if (expires && new Date(expires) <= new Date()) {
             this.remove([
                 name + '___expires',
@@ -29,11 +33,11 @@ export class LocalCookieHandler extends CookieHandler {
             ])
             return null
         }
-        const path = this.localCacheHandler.get(name + '___path')
+        const path = this.localCacheHandler.get(this.naming(name, 'path'))
         if (window.location.pathname.indexOf(path) !== 0) {
             return null
         }
-        return this.localCacheHandler.get(name)
+        return this.localCacheHandler.get(this.naming(name))
     }
 
     remove(names, path = '/', domain = null) {
