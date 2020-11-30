@@ -1,5 +1,6 @@
 export {CookieHandler} from './cookie-handlers/cookie-handler'
 export {JsCookieHandler} from './cookie-handlers/js-cookie-handler'
+export {LocalCookieHandler} from './cookie-handlers/local-cookie-handler'
 
 export {CookieStore} from './cookie-stores/cookie-store'
 export {BearerTokenCookieStore} from './cookie-stores/bearer-token-cookie-store'

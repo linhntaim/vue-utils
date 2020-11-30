@@ -10,7 +10,7 @@ export class BearerTokenCookieStore extends CookieStore {
         } : null
     }
 
-    store(value, expires = 365) {
+    store(value) {
         this.value = this.transform(value)
         this.cookieHandler.set(this.name, this.value, new Date(value.tokenEndTime))
         return this.value

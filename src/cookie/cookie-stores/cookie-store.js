@@ -18,9 +18,9 @@ export class CookieStore {
         return this.value
     }
 
-    store(value, expires = 365) {
+    store(value, expires) {
         this.value = this.transform(value)
-        this.cookieHandler.set(this.name, this.value, expires)
+        this.cookieHandler.set(this.name, this.value, expires ? expires : new Date(new Date().getTime() + 365 * 24 * 3600 * 1000))
         return this.value
     }
 

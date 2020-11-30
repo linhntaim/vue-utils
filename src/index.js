@@ -13,7 +13,7 @@ export {
     JqueryUi, JqueryDomSelection,
 } from './ui'
 export {
-    CookieHandler, JsCookieHandler,
+    CookieHandler, JsCookieHandler, LocalCookieHandler,
     CookieStore, BearerTokenCookieStore, DeviceCookieStore, SettingsCookieStore, PassportCookieStore,
 } from './cookie'
 export {DateTimer, NumberFormatter} from './settings'
