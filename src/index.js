@@ -14,7 +14,7 @@ export {
 } from './ui'
 export {
     CookieHandler, JsCookieHandler,
-    CookieStore, DeviceCookieStore, SettingsCookieStore, PassportCookieStore,
+    CookieStore, BearerTokenCookieStore, DeviceCookieStore, SettingsCookieStore, PassportCookieStore,
 } from './cookie'
 export {DateTimer, NumberFormatter} from './settings'
 
