@@ -9,7 +9,7 @@ export class LocalCookieHandler extends CookieHandler {
     }
 
     naming(name, suffix = null) {
-        return '___cookie:' + name + (suffix ? ':' + suffix : '')
+        return '___cookie_' + name + (suffix ? '___' + suffix : '')
     }
 
     setRaw(name, data, expires = null, path = '/', domain = null, sameSite = 'lax') {
@@ -26,11 +26,7 @@ export class LocalCookieHandler extends CookieHandler {
     getRaw(name) {
         const expires = this.localCacheHandler.get(this.naming(name, 'expires'))
         if (expires && new Date(expires) <= new Date()) {
-            this.remove([
-                name + '___expires',
-                name + '___path',
-                name,
-            ])
+            this.remove([name])
             return null
         }
         const path = this.localCacheHandler.get(this.naming(name, 'path'))
@@ -42,7 +38,12 @@ export class LocalCookieHandler extends CookieHandler {
 
     remove(names, path = '/', domain = null) {
         for (const i in names) {
-            this.localCacheHandler.remove(names[i])
+            const name = names[i]
+            if (path == this.localCacheHandler.get(this.naming(name, 'path'))) {
+                this.localCacheHandler.remove(this.naming(name, 'expires'))
+                this.localCacheHandler.remove(this.naming(name, 'path'))
+                this.localCacheHandler.remove(name)
+            }
         }
     }
 }
