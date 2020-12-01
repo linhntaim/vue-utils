@@ -42,7 +42,7 @@ export class LocalCookieHandler extends CookieHandler {
             if (path == this.localCacheHandler.get(this.naming(name, 'path'))) {
                 this.localCacheHandler.remove(this.naming(name, 'expires'))
                 this.localCacheHandler.remove(this.naming(name, 'path'))
-                this.localCacheHandler.remove(name)
+                this.localCacheHandler.remove(this.naming(name))
             }
         }
     }
