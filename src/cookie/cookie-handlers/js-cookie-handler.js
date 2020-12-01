@@ -10,7 +10,7 @@ export class JsCookieHandler extends CookieHandler {
         return Cookies.get(name)
     }
 
-    remove(names, path = '/', domain = null) {
+    removeRaw(names, path = '/', domain = null) {
         const options = this.buildOptions(null, path, domain)
         for (const i in names) {
             Cookies.remove(names[i], options)
@@ -19,11 +19,11 @@ export class JsCookieHandler extends CookieHandler {
 
     buildOptions(expires = null, path = '/', domain = null, sameSite = 'lax') {
         return {
-            expires: expires ? expires : this.settings.expires,
-            path: path ? path : this.settings.path,
-            domain: domain ? domain : this.settings.domain,
-            secure: window.location.protocol === 'https',
-            sameSite: sameSite ? sameSite : this.settings.sameSite,
+            expires: expires,
+            path: path,
+            domain: domain,
+            secure: this.secure(),
+            sameSite: sameSite,
         }
     }
 }

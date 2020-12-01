@@ -19,6 +19,7 @@ export class LocalCookieHandler extends CookieHandler {
             }
             this.localCacheHandler.set(this.naming(name, 'expires'), expires.toString())
         }
+        this.localCacheHandler.set(this.naming(name, 'domain'), domain)
         this.localCacheHandler.set(this.naming(name, 'path'), path)
         this.localCacheHandler.set(this.naming(name), data)
     }
@@ -29,6 +30,12 @@ export class LocalCookieHandler extends CookieHandler {
             this.remove([name])
             return null
         }
+        const domain = this.localCacheHandler.get(this.naming(name, 'domain'))
+        if (domain
+            && ((domain.charAt(0) === '.' && window.location.hostname.substring(window.location.hostname.length - domain.length) !== domain)
+                || (domain.charAt(0) !== '.' && window.location.hostname !== domain))) {
+            return null
+        }
         const path = this.localCacheHandler.get(this.naming(name, 'path'))
         if (window.location.pathname.indexOf(path) !== 0) {
             return null
@@ -36,11 +43,17 @@ export class LocalCookieHandler extends CookieHandler {
         return this.localCacheHandler.get(this.naming(name))
     }
 
-    remove(names, path = '/', domain = null) {
+    removeRaw(names, path = '/', domain = null) {
         for (const i in names) {
             const name = names[i]
-            if (path == this.localCacheHandler.get(this.naming(name, 'path'))) {
+            const d = this.localCacheHandler.get(this.naming(name, 'domain'))
+            const p = this.localCacheHandler.get(this.naming(name, 'path'))
+            if ((!d
+                || ((d.charAt(0) === '.' && window.location.hostname.substring(window.location.hostname.length - d.length) === d)
+                    || (d.charAt(0) !== '.' && window.location.hostname === d)))
+                && path == p) {
                 this.localCacheHandler.remove(this.naming(name, 'expires'))
+                this.localCacheHandler.remove(this.naming(name, 'domain'))
                 this.localCacheHandler.remove(this.naming(name, 'path'))
                 this.localCacheHandler.remove(this.naming(name))
             }
