@@ -39,6 +39,7 @@ export {Searcher} from './searcher'
 export {Sorter} from './sorter'
 
 export {PermissionChecker} from './permission-checker'
+export {Permit} from './permit'
 
 export {ProgressHandler} from './progress-handler'
 
