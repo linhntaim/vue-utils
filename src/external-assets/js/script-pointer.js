@@ -1,3 +1,3 @@
-let scriptPointer = 0
-
-export default scriptPointer
+export const scriptPointer = {
+    current: 0,
+}

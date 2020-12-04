@@ -1,4 +1,4 @@
-import scriptPointer from './script-pointer'
+import {scriptPointer} from './script-pointer'
 
 export class ExternalJs {
     constructor() {
@@ -28,10 +28,10 @@ export class ExternalJs {
     }
 
     addScript(scriptSrc) {
-        this.session[this.sessionPointer].push(++scriptPointer)
+        this.session[this.sessionPointer].push(++scriptPointer.current)
 
         const scriptElement = document.createElement('script')
-        scriptElement.setAttribute('id', 'script' + scriptPointer)
+        scriptElement.setAttribute('id', 'script' + scriptPointer.current)
         scriptElement.setAttribute('src', scriptSrc)
         document.body.appendChild(scriptElement)
         return scriptElement

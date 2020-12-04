@@ -2,7 +2,7 @@ import {CookieStore} from './cookie-store'
 
 export class BearerTokenCookieStore extends CookieStore {
     retrieveTransform(value) {
-        const refreshToken = this.cookieHandler.get(this.refreshTokenNaming(this.name))
+        const refreshToken = this.cookieStoreHandler.getJson(this.refreshTokenNaming(this.name))
         if (value) {
             return refreshToken ? {
                 accessToken: value.accessToken,
@@ -47,13 +47,20 @@ export class BearerTokenCookieStore extends CookieStore {
                 tokenType: transformed.tokenType,
                 expiresIn: transformed.expiresIn,
             }
-            this.cookieHandler.set(this.name, this.value, expires)
+            this.cookieStoreHandler
+                .setTemporarySettings({
+                    expires: expires,
+                })
+                .setJson(this.name, this.value)
             this.value.refreshToken = transformed.refreshToken
-            this.cookieHandler.set(
-                this.refreshTokenNaming(this.name),
-                this.value.refreshToken,
-                this.refreshTokenExpires ? this.refreshTokenExpires : expires,
-            )
+            this.cookieStoreHandler
+                .setTemporarySettings({
+                    expires: this.refreshTokenExpires ? this.refreshTokenExpires : expires,
+                })
+                .setJson(
+                    this.refreshTokenNaming(this.name),
+                    this.value.refreshToken,
+                )
         } else {
             this.value = null
         }
@@ -62,7 +69,7 @@ export class BearerTokenCookieStore extends CookieStore {
 
     remove() {
         this.refreshTokenExpires = null
-        this.cookieHandler.remove([this.refreshTokenNaming(this.name)])
+        this.cookieStoreHandler.remove(this.refreshTokenNaming(this.name))
         super.remove()
     }
 }

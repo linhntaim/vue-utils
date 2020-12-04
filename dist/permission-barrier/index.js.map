@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/permission-barrier/index.js"],"names":[],"mappings":"sEAAA,sUACA","sourcesContent":["export * from './permission-barrier'\r\nexport * from './permission-barrier-action'"],"file":"index.js"}

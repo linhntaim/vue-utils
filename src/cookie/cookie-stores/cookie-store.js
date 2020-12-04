@@ -1,6 +1,12 @@
 export class CookieStore {
-    constructor(cookieHandler, name, def = null) {
-        this.cookieHandler = cookieHandler
+    /**
+     *
+     * @param {CookieStoreHandler} cookieStoreHandler
+     * @param {String} name
+     * @param {Object|String} def
+     */
+    constructor(cookieStoreHandler, name, def = null) {
+        this.cookieStoreHandler = cookieStoreHandler
         this.name = name
         this.value = null
         this.def = def
@@ -16,7 +22,7 @@ export class CookieStore {
 
     retrieve() {
         if (this.value == null) {
-            const value = this.cookieHandler.get(this.name)
+            const value = this.cookieStoreHandler.getJson(this.name)
             this.value = this.retrieveTransform(value ? value : this.def)
         }
         return this.value
@@ -24,12 +30,16 @@ export class CookieStore {
 
     store(value, expires) {
         this.value = this.storeTransform(value)
-        this.cookieHandler.set(this.name, this.value, expires ? expires : new Date(new Date().getTime() + 365 * 24 * 3600 * 1000))
+        this.cookieStoreHandler
+            .setTemporarySettings({
+                expires: expires ? expires : new Date(new Date().getTime() + 365 * 24 * 3600 * 1000),
+            })
+            .setJson(this.name, this.value)
         return this.value
     }
 
     remove() {
-        this.cookieHandler.remove([this.name])
+        this.cookieStoreHandler.remove(this.name)
         this.value = null
     }
 }

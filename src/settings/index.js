@@ -1,2 +1,2 @@
-export {NumberFormatter} from './number-formatter'
-export {DateTimer} from './date-timer'
+export * from './number-formatter'
+export * from './date-timer'
