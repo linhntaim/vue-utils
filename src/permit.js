@@ -6,11 +6,13 @@ export class Permit {
      * @returns {boolean}
      */
     match(matchedPermissions, matchingPermissions) {
-        if (!matchedPermissions || !matchedPermissions.length) {
+        matchedPermissions = this.getPermissions(matchedPermissions)
+        if (!matchedPermissions.length) {
             return true
         }
 
-        if (!matchingPermissions || !matchingPermissions.length) {
+        matchingPermissions = this.getPermissions(matchingPermissions)
+        if (!matchingPermissions.length) {
             return false
         }
 
@@ -29,5 +31,16 @@ export class Permit {
             matchedPermissions[permissionName] = matchingPermissions.includes(permissionName)
         })
         return matchedPermissions
+    }
+
+    /**
+     *
+     * @param {String[]|String} permissions
+     * @returns {String[]}
+     */
+    getPermissions(permissions) {
+        return permissions ?
+            (typeof permissions === 'string' ? permissions.split('|') : permissions)
+            : []
     }
 }

@@ -16,10 +16,7 @@ export class PermissionBarrier {
     importFromRoutePermissions(routePermissions = {}) {
         Object.keys(routePermissions).forEach(routeName => {
             const permissions = routePermissions[routeName]
-            this.routes[routeName] = new PermissionBarrierAction(
-                typeof permissions === 'string' ?
-                    permissions.split('|') : permissions,
-            )
+            this.routes[routeName] = new PermissionBarrierAction(this.permit.getPermissions(permissions))
         })
         return this
     }

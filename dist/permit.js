@@ -3,10 +3,14 @@
      * @param {Array} matchedPermissions
      * @param {Array} matchingPermissions
      * @returns {boolean}
-     */value:function match(matchedPermissions,matchingPermissions){if(!matchedPermissions||!matchedPermissions.length){return true}if(!matchingPermissions||!matchingPermissions.length){return false}return matchedPermissions.some(function(matchedPermission){return matchingPermissions.includes(matchedPermission)})}/**
+     */value:function match(matchedPermissions,matchingPermissions){matchedPermissions=this.getPermissions(matchedPermissions);if(!matchedPermissions.length){return true}matchingPermissions=this.getPermissions(matchingPermissions);if(!matchingPermissions.length){return false}return matchedPermissions.some(function(matchedPermission){return matchingPermissions.includes(matchedPermission)})}/**
      *
      * @param {Array} matchedPermissionNames
      * @param {Array} matchingPermissions
      * @returns {{}}
-     */},{key:"matchWithNames",value:function matchWithNames(matchedPermissionNames,matchingPermissions){var matchedPermissions={};matchedPermissionNames.forEach(function(permissionName){matchedPermissions[permissionName]=matchingPermissions.includes(permissionName)});return matchedPermissions}}]);return Permit}();exports.Permit=Permit;
+     */},{key:"matchWithNames",value:function matchWithNames(matchedPermissionNames,matchingPermissions){var matchedPermissions={};matchedPermissionNames.forEach(function(permissionName){matchedPermissions[permissionName]=matchingPermissions.includes(permissionName)});return matchedPermissions}/**
+     *
+     * @param {String[]|String} permissions
+     * @returns {String[]}
+     */},{key:"getPermissions",value:function getPermissions(permissions){return permissions?typeof permissions==="string"?permissions.split("|"):permissions:[]}}]);return Permit}();exports.Permit=Permit;
 //# sourceMappingURL=permit.js.map
