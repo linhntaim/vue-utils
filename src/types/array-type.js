@@ -1,6 +1,10 @@
 import {ObjectType} from './object-type'
 
 export class ArrayType extends ObjectType {
+    constructor() {
+        super()
+    }
+
     static is(value) {
         return Array.isArray(value)
     }

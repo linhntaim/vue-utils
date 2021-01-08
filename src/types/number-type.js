@@ -1,6 +1,10 @@
 import {PrimitiveType} from './primitive-type'
 
 export class NumberType extends PrimitiveType {
+    constructor() {
+        super()
+    }
+
     static is(value) {
         return typeof value === 'number'
             || !isNaN(+value)

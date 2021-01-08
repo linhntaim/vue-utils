@@ -4,6 +4,9 @@ import {ObjectType} from './object-type'
 import {FunctionType} from './function-type'
 
 export class Type {
+    constructor() {
+    }
+
     static is(value) {
         return true
     }

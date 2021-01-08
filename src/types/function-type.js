@@ -1,6 +1,10 @@
 import {Type} from './type'
 
 export class FunctionType extends Type {
+    constructor() {
+        super()
+    }
+
     static is(value) {
         return typeof value === 'function'
     }

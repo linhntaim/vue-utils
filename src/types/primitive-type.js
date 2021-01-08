@@ -1,8 +1,11 @@
 import {Type} from './type'
 import {StringType} from './string-type'
-import {NumberType} from './number-type'
 
 export class PrimitiveType extends Type {
+    constructor() {
+        super()
+    }
+
     static is(value) {
         if (value === null) return true
 

@@ -2,6 +2,10 @@ import {ArrayType} from './array-type'
 import {Type} from './type'
 
 export class ObjectType extends Type {
+    constructor() {
+        super()
+    }
+
     static is(value) {
         return value !== null
             && !ArrayType.isArray(value)
