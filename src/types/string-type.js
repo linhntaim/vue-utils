@@ -1,10 +1,6 @@
 import {PrimitiveType} from './primitive-type'
 
 export class StringType extends PrimitiveType {
-    constructor() {
-        super()
-    }
-
     static is(value) {
         return typeof value === 'string'
     }
@@ -80,7 +76,7 @@ export class StringType extends PrimitiveType {
     static lines(text) {
         return text.split(/\r*\n/)
             .map(line => {
-                line = StringType.trim(line)
+                line = this.trim(line)
                 if (line) return line
             })
             .filter(i => {
