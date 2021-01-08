@@ -105,3 +105,13 @@ export {
 export {
     CountDown,
 } from './count-down'
+
+export {
+    Type,
+    FunctionType,
+    PrimitiveType,
+    StringType,
+    NumberType,
+    ObjectType,
+    ArrayType,
+} from './types'

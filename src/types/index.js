@@ -1,0 +1,7 @@
+export * from './type'
+export * from './function-type'
+export * from './primitive-type'
+export * from './string-type'
+export * from './number-type'
+export * from './object-type'
+export * from './array-type'
