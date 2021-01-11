@@ -1,26 +1,21 @@
-import {ArrayType} from './array-type'
 import {Type} from './type'
 
 export class ObjectType extends Type {
-    constructor() {
-        super()
-    }
-
-    static is(value) {
+    is(value) {
         return value !== null
-            && !ArrayType.isArray(value)
+            && !Array.isArray(value)
             && typeof value === 'object'
     }
 
-    static clone(value) {
-        return Object.assign({}, value)
-    }
-
-    static empty(value) {
+    empty(value) {
         return Object.keys(value).length === 0
     }
 
-    static only(object, keys) {
+    clone(value) {
+        return Object.assign({}, value)
+    }
+
+    only(object, keys) {
         const only = {}
         keys.forEach(key => {
             only[key] = key in object ? object[key] : null
@@ -28,18 +23,18 @@ export class ObjectType extends Type {
         return only
     }
 
-    static merge(object1, object2) {
+    merge(object1, object2) {
         Object.keys(object2).forEach(key => {
             object1[key] = object2[key]
         })
         return object1
     }
 
-    static hasKey(object, key) {
+    hasKey(object, key) {
         return Object.keys(object).includes(key)
     }
 
-    static hasValue(object, value) {
+    hasValue(object, value) {
         return Object.values(object).includes(value)
     }
 }

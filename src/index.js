@@ -114,4 +114,12 @@ export {
     NumberType,
     ObjectType,
     ArrayType,
+    TypeFunction,
+    TypePrimitive,
+    TypeString,
+    TypeNumber,
+    TypeObject,
+    TypeArray,
+    empty,
+    clone,
 } from './types'

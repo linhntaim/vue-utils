@@ -1,23 +1,19 @@
 import {ObjectType} from './object-type'
 
 export class ArrayType extends ObjectType {
-    constructor() {
-        super()
-    }
-
-    static is(value) {
+    is(value) {
         return Array.isArray(value)
     }
 
-    static clone(value) {
-        return Array.from(value)
-    }
-
-    static empty(value) {
+    empty(value) {
         return value.length === 0
     }
 
-    static only(array, keys) {
+    clone(value) {
+        return Array.from(value)
+    }
+
+    only(array, keys) {
         const only = []
         keys.forEach(key => {
             only.push(key >= 0 && key < array.length ? array[key] : null)
@@ -25,18 +21,18 @@ export class ArrayType extends ObjectType {
         return only
     }
 
-    static merge(array1, array2) {
+    merge(array1, array2) {
         array2.forEach(value => {
             array1.push(value)
         })
         return array1
     }
 
-    static hasKey(array, key) {
+    hasKey(array, key) {
         return key >= 0 && key <= array.length
     }
 
-    static hasValue(array, value) {
+    hasValue(array, value) {
         return array.includes(value)
     }
 
@@ -47,7 +43,7 @@ export class ArrayType extends ObjectType {
      * @param {Number} step
      * @returns {Number[]}
      */
-    static range(start, end, step = 1) {
+    range(start, end, step = 1) {
         const range = []
         if (step < 0) step = -step
         if (start <= end) {

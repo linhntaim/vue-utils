@@ -1,28 +1,24 @@
 import {PrimitiveType} from './primitive-type'
 
 export class NumberType extends PrimitiveType {
-    constructor() {
-        super()
-    }
-
-    static is(value) {
+    is(value) {
         return typeof value === 'number'
             || !isNaN(+value)
     }
 
-    static empty(value) {
-        return value === '' || value.trim() === ''
+    empty(value) {
+        return value === 0 || isNaN(value)
     }
 
-    static int(value) {
-        if (NumberType.is(value)) {
+    int(value) {
+        if (this.is(value)) {
             return parseInt((+value).toString())
         }
         return parseInt(value) | 0
     }
 
-    static float(value) {
-        if (NumberType.is(value)) {
+    float(value) {
+        if (this.is(value)) {
             return parseFloat((+value).toString())
         }
         const float = parseFloat(value)
@@ -35,7 +31,7 @@ export class NumberType extends PrimitiveType {
      * @param {Number} max
      * @returns {Number}
      */
-    static randomInt(min, max) {
+    randomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min)
     }
 
@@ -45,7 +41,7 @@ export class NumberType extends PrimitiveType {
      * @param {Number} max
      * @returns {Number}
      */
-    static random(min, max) {
+    random(min, max) {
         return Math.random() * (max - min) + min
     }
 }
