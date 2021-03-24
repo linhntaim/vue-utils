@@ -14,7 +14,13 @@ export class Crypto {
     }
 
     decrypt(text, secret) {
-        return CryptoJS.AES.decrypt(text, this.getSecret(secret)).toString(CryptoJS.enc.Utf8)
+        try {
+            return CryptoJS.AES.decrypt(text, this.getSecret(secret)).toString(CryptoJS.enc.Utf8)
+        } catch (e) {
+            // eslint-disable-next-line no-console
+            console.log(e)
+            return null
+        }
     }
 
     encryptJson(data, secret) {
@@ -23,6 +29,14 @@ export class Crypto {
 
     decryptJson(text, secret) {
         return JSON.parse(this.decrypt(text, this.getSecret(secret)))
+    }
+
+    encryptBase64(text) {
+        return CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(text))
+    }
+
+    decryptBase64(encodedText) {
+        return CryptoJS.enc.Utf8.stringify(CryptoJS.enc.Base64.parse(encodedText))
     }
 }
 
