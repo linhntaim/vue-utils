@@ -1,1 +1,1 @@
-{"version":3,"sources":["../../../src/external-assets/js/script-pointer.js"],"names":["scriptPointer"],"mappings":"gGAAA,GAAIA,CAAAA,aAAa,CAAG,CAApB,C,aAEeA,a","sourcesContent":["let scriptPointer = 0\r\n\r\nexport default scriptPointer\r\n"],"file":"script-pointer.js"}
+{"version":3,"sources":["../../../src/external-assets/js/script-pointer.js"],"names":["scriptPointer","current"],"mappings":"mGAAO,GAAMA,CAAAA,aAAa,CAAG,CACzBC,OAAO,CAAE,CADgB,CAAtB,C","sourcesContent":["export const scriptPointer = {\r\n    current: 0,\r\n}\r\n"],"file":"script-pointer.js"}

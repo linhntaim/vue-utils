@@ -1,5 +1,5 @@
 export class Paginator {
-    constructor(itemsPerPageList, cacheHandler, maxPageShowed = 5) {
+    constructor(itemsPerPageList, storeHandler, maxPageShowed = 5) {
         this.itemsPerPageList = itemsPerPageList
         this.maxPageShowed = maxPageShowed
         this.pagination = {
@@ -21,7 +21,7 @@ export class Paginator {
             },
             totalItems: 0,
         }
-        this.cacheHandler = cacheHandler
+        this.storeHandler = storeHandler
         this.restoreItemsPerPage()
     }
 
@@ -73,7 +73,7 @@ export class Paginator {
     }
 
     restoreItemsPerPage() {
-        this.pagination.itemsPerPage = parseInt(this.cacheHandler.get('items_per_page')) | 0
+        this.pagination.itemsPerPage = parseInt(this.storeHandler.get('items_per_page', '0')) | 0
         if (this.itemsPerPageList.indexOf(this.pagination.itemsPerPage) === -1) {
             this.pagination.itemsPerPage = this.itemsPerPageList[0]
             this.storeItemsPerPage()
@@ -81,7 +81,7 @@ export class Paginator {
     }
 
     storeItemsPerPage() {
-        this.cacheHandler.set('items_per_page', this.pagination.itemsPerPage)
+        this.storeHandler.set('items_per_page', this.pagination.itemsPerPage.toString())
     }
 
     setPage(page) {

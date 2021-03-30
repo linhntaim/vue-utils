@@ -1,3 +1,3 @@
-export {FileHelper} from './file-helper'
-export {FileSplitter} from './file-splitter'
-export {FilesUploader} from './files-uploader'
+export * from './file-helper'
+export * from './file-splitter'
+export * from './files-uploader'

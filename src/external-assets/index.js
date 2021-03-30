@@ -1,3 +1,3 @@
-export {GoogleApi} from './js/google-api'
-export {FacebookSdk} from './js/facebook-sdk'
-export {JsLoader} from './js/js-loader'
+export * from './js/google-api'
+export * from './js/facebook-sdk'
+export * from './js/js-loader'

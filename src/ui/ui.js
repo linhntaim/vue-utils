@@ -18,8 +18,8 @@ export class Ui {
                 } : element => element)
     }
 
-    openWindow(url = null, target = null, features = null, replace = null) {
-        return window.open(url, target, features, replace)
+    openWindow(url = null, target = null, features = null) {
+        return window.open(url, target, features)
     }
 
     setLang(lang) {

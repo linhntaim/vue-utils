@@ -1,2 +1,2 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:true});exports["default"]=void 0;var scriptPointer=0;var _default=scriptPointer;exports["default"]=_default;
+"use strict";Object.defineProperty(exports,"__esModule",{value:true});exports.scriptPointer=void 0;var scriptPointer={current:0};exports.scriptPointer=scriptPointer;
 //# sourceMappingURL=script-pointer.js.map
