@@ -1,4 +1,4 @@
-import SettingsHelper from './settings-helper'
+import {SettingsHelper} from './settings-helper'
 
 const DEFAULT_NUMBER_OF_DECIMAL_POINTS = 2
 

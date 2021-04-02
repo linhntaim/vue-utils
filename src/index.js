@@ -49,11 +49,13 @@ export {
 } from './cookie'
 
 export {
+    SettingsHelper,
     DateTimer,
     NumberFormatter,
 } from './settings'
 
 export {
+    Loader,
     JsLoader,
     GoogleApi,
     FacebookSdk,
