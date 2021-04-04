@@ -1,4 +1,4 @@
-export default class Loader {
+export class Loader {
     constructor(settings = {}) {
         this.loaded = false
         this.settings = settings

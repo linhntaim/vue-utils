@@ -1,4 +1,4 @@
-export default class SettingsHelper {
+export class SettingsHelper {
     constructor(settings) {
         this.apply(settings)
     }

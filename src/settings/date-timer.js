@@ -1,4 +1,4 @@
-import SettingsHelper from './settings-helper'
+import {SettingsHelper} from './settings-helper'
 
 export class DateTimer extends SettingsHelper {
     constructor(settings, compiler = null) {

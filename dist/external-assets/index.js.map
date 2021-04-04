@@ -1,1 +1,1 @@
-{"version":3,"sources":["../../src/external-assets/index.js"],"names":[],"mappings":"sEAAA,iSACA,2SACA","sourcesContent":["export * from './js/google-api'\r\nexport * from './js/facebook-sdk'\r\nexport * from './js/js-loader'\r\n"],"file":"index.js"}
+{"version":3,"sources":["../../src/external-assets/index.js"],"names":[],"mappings":"sEAAA,8QACA,4RACA,iSACA","sourcesContent":["export * from './loader'\r\nexport * from './js/js-loader'\r\nexport * from './js/google-api'\r\nexport * from './js/facebook-sdk'\r\n"],"file":"index.js"}
