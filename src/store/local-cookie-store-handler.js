@@ -2,71 +2,68 @@ import {CookieStoreHandler} from './cookie-store-handler'
 import {LocalStoreHandler} from './local-store-handler'
 
 export class LocalCookieStoreHandler extends CookieStoreHandler {
-    constructor(settings, crypto, encryptExceptNames = null) {
+    constructor(settings, crypto = null, encryptExceptNames = null, namePrefix = '___cookie_', store = null) {
         super(settings, crypto, encryptExceptNames)
 
-        this.store = new LocalStoreHandler(this.crypto, '*')
-        this.namePrefix = '___cookie_'
+        this.store = new LocalStoreHandler(null, null, namePrefix, store)
     }
 
-    naming(name, suffix = null) {
-        return super.naming(name) + (suffix ? '___' + suffix : '')
+    suffixNaming(name, suffix = null) {
+        return name + (suffix ? '___' + suffix : '')
     }
 
     setCookieRaw(name, value, expires = null, path = '/', domain = null, sameSite = 'lax') {
         if (expires) {
             if (expires <= new Date()) {
-                return
+                return this
             }
-            this.store.setRaw(this.naming(name, 'expires'), expires.toString())
+            this.store.set(this.suffixNaming(name, 'expires'), expires.toString())
         }
-        this.store.setRaw(this.naming(name, 'domain'), domain)
-        this.store.setRaw(this.naming(name, 'path'), path)
-        this.store.setRaw(this.naming(name), value)
+        this.store.set(this.suffixNaming(name, 'domain'), domain)
+        this.store.set(this.suffixNaming(name, 'path'), path)
+        this.store.set(this.suffixNaming(name), value)
+        return this
     }
 
     getCookieRaw(name) {
-        const expires = this.store.getRaw(this.naming(name, 'expires'))
+        const expires = this.store.get(this.suffixNaming(name, 'expires'))
         if (expires && new Date(expires) <= new Date()) {
-            this.remove(name)
+            this.removeRaw(name)
             return null
         }
-        const domain = this.store.getRaw(this.naming(name, 'domain'))
+        const domain = this.store.get(this.suffixNaming(name, 'domain'))
         const hostname = window.location.hostname
         if (domain
             && ((domain.charAt(0) === '.' && hostname.substring(hostname.length - domain.length) !== domain)
                 || (domain.charAt(0) !== '.' && hostname !== domain))) {
             return null
         }
-        const path = this.store.getRaw(this.naming(name, 'path'))
+        const path = this.store.get(this.suffixNaming(name, 'path'))
         const pathname = window.location.pathname
         if (pathname.indexOf(path) !== 0) {
             return null
         }
-        return this.store.getRaw(this.naming(name))
+        return this.store.get(this.suffixNaming(name))
     }
 
     removeCookieRaw(name, path = '/', domain = null) {
-        const d = this.store.getRaw(this.naming(name, 'domain'))
-        const p = this.store.getRaw(this.naming(name, 'path'))
+        const d = this.store.get(this.suffixNaming(name, 'domain'))
+        const p = this.store.get(this.suffixNaming(name, 'path'))
         const hostname = window.location.hostname
         if ((!d
             || ((d.charAt(0) === '.' && hostname.substring(hostname.length - d.length) === d)
                 || (d.charAt(0) !== '.' && hostname === d)))
             && path === p) {
-            this.store.removeRaw(this.naming(name, 'expires'))
-            this.store.removeRaw(this.naming(name, 'domain'))
-            this.store.removeRaw(this.naming(name, 'path'))
-            this.store.removeRaw(this.naming(name))
+            this.store.remove(this.suffixNaming(name, 'expires'))
+            this.store.remove(this.suffixNaming(name, 'domain'))
+            this.store.remove(this.suffixNaming(name, 'path'))
+            this.store.remove(this.suffixNaming(name))
         }
+        return this
     }
 
     clearCookieRaw() {
-        for (let i = 0; i < window.localStorage.length; ++i) {
-            const name = window.localStorage.key(i)
-            if (name.substring(0, this.namePrefix.length) === this.namePrefix) {
-                this.store.removeRaw(name)
-            }
-        }
+        this.store.clear()
+        return this
     }
 }

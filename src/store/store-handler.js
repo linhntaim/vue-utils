@@ -1,20 +1,17 @@
 export class StoreHandler {
     /**
      *
-     * @param {Crypto} crypto
+     * @param {Crypto|null} crypto
      * @param {String[]|String|null} encryptExceptNames
      * @param {String} namePrefix
+     * @param {Object|null} store
      */
-    constructor(crypto, encryptExceptNames = null, namePrefix = '') {
+    constructor(crypto = null, encryptExceptNames = null, namePrefix = '', store = null) {
         this.crypto = crypto
         this.encryptExceptNames = encryptExceptNames ?
-            (typeof encryptExceptNames === 'string' ? [encryptExceptNames] : encryptExceptNames) : null
-        this.store = {}
+            (typeof encryptExceptNames === 'string' ? encryptExceptNames.split(',') : encryptExceptNames) : null
+        this.store = store ? store : {}
         this.namePrefix = namePrefix
-    }
-
-    naming(name) {
-        return this.namePrefix + name
     }
 
     shouldEncrypt(name) {
@@ -22,8 +19,28 @@ export class StoreHandler {
             || (!this.encryptExceptNames.includes('*') && !this.encryptExceptNames.includes(name))
     }
 
+    naming(name) {
+        return this.namePrefix + name
+    }
+
+    beforeNaming(rawName) {
+        return rawName.substr(this.namePrefix.length)
+    }
+
+    isNamed(rawName) {
+        return rawName.substr(0, this.namePrefix.length) === this.namePrefix
+    }
+
+    forEach(callback) {
+        Object.keys(this.store).forEach(rawName => {
+            callback(rawName, this.beforeNaming(), this)
+        })
+        return this
+    }
+
     setRaw(name, value) {
         this.store[name] = value
+        return this
     }
 
     getRaw(name) {
@@ -34,10 +51,12 @@ export class StoreHandler {
         if (name in this.store) {
             delete this.store[name]
         }
+        return this
     }
 
     clearRaw() {
         this.store = {}
+        return this
     }
 
     /**
@@ -48,9 +67,11 @@ export class StoreHandler {
      * @returns {StoreHandler}
      */
     set(name, value, encrypted = null) {
-        this.setRaw(this.naming(name), (encrypted === null && this.shouldEncrypt(name)) || encrypted === true ?
-            this.crypto.encrypt(value) : value)
-        return this
+        return this.setRaw(
+            this.naming(name),
+            this.crypto && ((encrypted === null && this.shouldEncrypt(name)) || encrypted === true) ?
+                this.crypto.encrypt(value) : value,
+        )
     }
 
     /**
@@ -63,8 +84,10 @@ export class StoreHandler {
     get(name, def = null, encrypted = null) {
         const value = this.getRaw(this.naming(name))
         return value ?
-            ((encrypted === null && this.shouldEncrypt(name)) || encrypted === true ?
-                this.crypto.decrypt(value) : value)
+            (
+                this.crypto && ((encrypted === null && this.shouldEncrypt(name)) || encrypted === true) ?
+                    this.crypto.decrypt(value) : value
+            )
             : def
     }
 
@@ -101,8 +124,7 @@ export class StoreHandler {
      * @returns {StoreHandler}
      */
     remove(name) {
-        this.removeRaw(this.naming(name))
-        return this
+        return this.removeRaw(this.naming(name))
     }
 
     /**
@@ -120,7 +142,6 @@ export class StoreHandler {
      * @returns {StoreHandler}
      */
     clear() {
-        this.clearRaw()
-        return this
+        return this.clearRaw()
     }
 }
