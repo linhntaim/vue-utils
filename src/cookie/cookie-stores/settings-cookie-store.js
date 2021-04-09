@@ -3,7 +3,6 @@ import {CookieStore} from './cookie-store'
 export class SettingsCookieStore extends CookieStore {
     retrieveTransform(value) {
         return value ? {
-            appId: value.appId,
             appUrl: value.appUrl,
             locale: value.locale,
             country: value.country,
@@ -20,7 +19,6 @@ export class SettingsCookieStore extends CookieStore {
 
     storeTransform(value) {
         return value ? {
-            appId: value.appId,
             appUrl: value.appUrl,
             locale: value.locale,
             country: value.country,

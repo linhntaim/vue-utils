@@ -28,5 +28,5 @@
      *
      * @param {String} text
      * @returns {String[]}
-     */},{key:"lines",value:function lines(text){var _this=this;return text.split(/\r*\n/).map(function(line){line=_this.trim(line);if(line)return line}).filter(function(i){return i})}}]);return StringType}(_primitiveType.PrimitiveType);exports.StringType=StringType;
+     */},{key:"lines",value:function lines(text){var _this=this;return text.split(/\r*\n|\r/).map(function(line){line=_this.trim(line);if(line)return line}).filter(function(i){return i})}}]);return StringType}(_primitiveType.PrimitiveType);exports.StringType=StringType;
 //# sourceMappingURL=string-type.js.map

@@ -74,7 +74,7 @@ export class StringType extends PrimitiveType {
      * @returns {String[]}
      */
     lines(text) {
-        return text.split(/\r*\n/)
+        return text.split(/\r*\n|\r/)
             .map(line => {
                 line = this.trim(line)
                 if (line) return line
