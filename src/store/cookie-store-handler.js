@@ -1,8 +1,8 @@
 import {StoreHandler} from './store-handler'
 
 export class CookieStoreHandler extends StoreHandler {
-    constructor(settings, crypto, encryptExceptNames = null, namePrefix = '') {
-        super(crypto, encryptExceptNames, namePrefix)
+    constructor(settings, crypto = null, encryptExceptNames = null, namePrefix = '', store = null) {
+        super(crypto, encryptExceptNames, namePrefix, store)
 
         this.settings = settings
         this.temporarySettings = {}
@@ -26,7 +26,7 @@ export class CookieStoreHandler extends StoreHandler {
 
     setRaw(name, value) {
         const settings = this.retrieveTemporarySettings()
-        this.setCookieRaw(
+        return this.setCookieRaw(
             name,
             value,
             this.expires(settings.expires),
@@ -37,7 +37,7 @@ export class CookieStoreHandler extends StoreHandler {
     }
 
     setCookieRaw(name, value, expires = null, path = '/', domain = null, sameSite = 'lax') {
-
+        return this
     }
 
     getRaw(name) {
@@ -45,12 +45,12 @@ export class CookieStoreHandler extends StoreHandler {
     }
 
     getCookieRaw(name) {
-
+        return null
     }
 
     removeRaw(name) {
         const settings = this.retrieveTemporarySettings()
-        this.removeCookieRaw(
+        return this.removeCookieRaw(
             name,
             this.path(settings.path),
             this.domain(settings.domain),
@@ -58,7 +58,7 @@ export class CookieStoreHandler extends StoreHandler {
     }
 
     removeCookieRaw(name, path = '/', domain = null) {
-
+        return this
     }
 
     removeMany(names) {
@@ -71,11 +71,11 @@ export class CookieStoreHandler extends StoreHandler {
     }
 
     clearRaw() {
-        this.clearCookieRaw()
+        return this.clearCookieRaw()
     }
 
     clearCookieRaw() {
-
+        return this
     }
 
     /**

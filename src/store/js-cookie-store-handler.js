@@ -10,6 +10,7 @@ export class JsCookieStoreHandler extends CookieStoreHandler {
             secure: this.secure(),
             sameSite: sameSite,
         })
+        return this
     }
 
     getCookieRaw(name) {
@@ -27,5 +28,6 @@ export class JsCookieStoreHandler extends CookieStoreHandler {
         Object.keys(Cookies.get()).forEach(name => {
             Cookies.remove(name)
         })
+        return this
     }
 }
