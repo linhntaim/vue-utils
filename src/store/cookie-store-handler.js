@@ -101,6 +101,6 @@ export class CookieStoreHandler extends StoreHandler {
     }
 
     secure() {
-        return window.location.protocol === 'https'
+        return window.location.protocol === 'https:'
     }
 }
