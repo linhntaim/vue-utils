@@ -2,14 +2,14 @@ import {CookieStoreHandler} from './cookie-store-handler'
 import {LocalStoreHandler} from './local-store-handler'
 
 export class LocalCookieStoreHandler extends CookieStoreHandler {
-    constructor(settings, crypto = null, encryptExceptNames = null, namePrefix = '___cookie_', store = null) {
+    constructor(settings, crypto = null, encryptExceptNames = null, namePrefix = '__cookie_', store = null) {
         super(settings, crypto, encryptExceptNames)
 
         this.store = new LocalStoreHandler(null, null, namePrefix, store)
     }
 
     suffixNaming(name, suffix = null) {
-        return name + (suffix ? '___' + suffix : '')
+        return name + (suffix ? '__' + suffix : '')
     }
 
     setCookieRaw(name, value, expires = null, path = '/', domain = null, sameSite = 'lax') {

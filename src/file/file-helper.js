@@ -1,28 +1,43 @@
 export class FileHelper {
     constructor(numberFormatter) {
         this.numberFormatter = numberFormatter
-        this.fileSizeType = ['byte', 'bytes', 'KB', 'MB', 'GB']
+        this.fileSizeUnits = ['byte', 'bytes', 'KB', 'MB', 'GB', 'TB']
     }
 
-    asSize(fileSize) {
-        return this.asSizeWithTypeIndex(fileSize)
-    }
+    autoDisplaySize(size, callback = null, unitSeparator = ' ') {
+        let unitIndex = 0
 
-    asSizeWithTypeIndex(fileSize, typeIndex = 1) {
-        if (fileSize > 1024) {
-            return this.asSizeWithTypeIndex(fileSize / 1024, ++typeIndex)
+        if (size > 1) {
+            unitIndex = 1
+            while (size > 1024) {
+                size /= 1024
+                ++unitIndex
+            }
         }
 
-        if (typeIndex === 1 && fileSize <= 1) {
-            typeIndex = 0
+        if (callback === true) {
+            size = size.toFixed()
+        } else if (typeof callback === 'number') {
+            size = size.toFixed(callback)
+        } else if (typeof callback === 'function') {
+            size = callback(size)
         }
-
-        return (fileSize - parseInt(fileSize) > 0 ?
-            this.numberFormatter.formatNumber(fileSize) : this.numberFormatter.formatInt(fileSize))
-            + ' ' + this.fileSizeType[typeIndex]
+        return size + unitSeparator + this.fileSizeUnits[unitIndex]
     }
 
-    checkFile(file, {allowedExtensions = null, allowedExtensionsErrorCallback = null, maxSize = null, maxSizeErrorCallback = null}) {
+    autoLocalizedDisplaySize(size, unitSeparator = ' ') {
+        return this.autoDisplaySize(size, (size) => {
+            return size !== parseInt(size.toString()) ?
+                this.numberFormatter.formatNumber(size) : this.numberFormatter.formatInt(size)
+        }, unitSeparator)
+    }
+
+    checkFile(file, {
+        allowedExtensions = null,
+        allowedExtensionsErrorCallback = null,
+        maxSize = null,
+        maxSizeErrorCallback = null,
+    }) {
         if (allowedExtensions) {
             if (!file.name.includes('.') || !allowedExtensions.includes(file.name.split('.').pop())) {
                 allowedExtensionsErrorCallback && allowedExtensionsErrorCallback()
@@ -36,5 +51,17 @@ export class FileHelper {
             }
         }
         return true
+    }
+
+    /**
+     *
+     * @param {String[]} extensions
+     * @param {String} delimiter
+     * @returns {String}
+     */
+    acceptedExtensions(extensions, delimiter = ', ') {
+        return extensions
+            .map(extension => extension.startsWith('.') ? extension : '.' + extension)
+            .join(delimiter)
     }
 }

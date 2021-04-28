@@ -74,7 +74,7 @@ export class StringType extends PrimitiveType {
      * @returns {String[]}
      */
     lines(text) {
-        return text.split(/\r*\n/)
+        return text.split(/\r*\n|\r/)
             .map(line => {
                 line = this.trim(line)
                 if (line) return line
@@ -82,5 +82,61 @@ export class StringType extends PrimitiveType {
             .filter(i => {
                 return i
             })
+    }
+
+    escapeHtmlSpecialChars(text, chars = null, ...more) {
+        if (!chars) {
+            chars = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                '\'': '&#039;',
+            }
+        }
+        const escapeChars = (replacingText, replacingChars) => {
+            Object.keys(replacingChars).forEach(char => {
+                replacingText = replacingText.replace(
+                    new RegExp(char, 'g'),
+                    replacingChars[char],
+                )
+            })
+            return replacingText
+        }
+        text = escapeChars(text, chars)
+        more.forEach(moreChars => {
+            text = escapeChars(text, moreChars)
+        })
+        return text
+    }
+
+    escapeHtmlChars(text, ...more) {
+        return this.escapeHtmlSpecialChars(text, {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+        }, ...more)
+    }
+
+    escapeHtmlQuotes(text, ...more) {
+        return this.escapeHtmlSpecialChars(text, {
+            '"': '&quot;',
+            '\'': '&#039;',
+        }, ...more)
+    }
+
+    isHttpUrl(text, secure = 1 | 2) {
+        switch (secure) {
+            case 1:
+                return /^https:\/\//.test(text)
+            case 2:
+                return /^http:\/\//.test(text)
+            default:
+                return /^https?:\/\//.test(text)
+        }
+    }
+
+    ifHttpUrl(text, secure = 1 | 2) {
+        return this.isHttpUrl(text, secure) ? text : null
     }
 }

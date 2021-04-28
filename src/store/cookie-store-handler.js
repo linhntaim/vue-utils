@@ -1,8 +1,8 @@
 import {StoreHandler} from './store-handler'
 
 export class CookieStoreHandler extends StoreHandler {
-    constructor(settings, crypto = null, encryptExceptNames = null, namePrefix = '') {
-        super(crypto, encryptExceptNames, namePrefix)
+    constructor(settings, crypto = null, encryptExceptNames = null, namePrefix = '', store = null) {
+        super(crypto, encryptExceptNames, namePrefix, store)
 
         this.settings = settings
         this.temporarySettings = {}
@@ -101,6 +101,6 @@ export class CookieStoreHandler extends StoreHandler {
     }
 
     secure() {
-        return window.location.protocol === 'https'
+        return window.location.protocol === 'https:'
     }
 }

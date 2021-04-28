@@ -1,6 +1,6 @@
 {
     "name": "@linhntaim/vue-utils",
-    "version": "1.4.1",
+    "version": "1.4.6",
     "description": "To support Vue application",
     "main": "dist/index.js",
     "scripts": {

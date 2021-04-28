@@ -30,7 +30,7 @@ export class BearerTokenCookieStore extends CookieStore {
     }
 
     refreshTokenNaming(name) {
-        return name + '___refresh'
+        return name + '__refresh'
     }
 
     setRefreshTokenExpires(expires) {
